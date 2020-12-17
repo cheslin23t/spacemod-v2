@@ -1,0 +1,14 @@
+const { MessageEmbed } = require('discord.js');
+
+module.exports = {
+    name: 'command',
+    category: 'cmdcatagory',
+    description: 'cmddesc',
+    usage: `ping`,
+    run: async (client, message, args) => {
+        //cmd code
+
+
+        
+    }
+}
