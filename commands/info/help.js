@@ -43,7 +43,7 @@ async function helpMSG(client, message) {
 
     const embed = new MessageEmbed()
         .setColor(process.env.COLOR)
-        .setTitle('Discord.js Tutorials')
+        .setTitle('Spacemod Help Page')
         .setThumbnail(client.user.avatarURL())
         .setDescription(`For a full list of commands, please type \`${guildDB.prefix}commands\` \n\nTo see more info about a specific command, please type \`${guildDB.prefix}help <command>\` without the \`<>\``)
         .setFooter('Created by spacehold');

@@ -43,7 +43,7 @@ module.exports = {
                 .then(result => console.log(result))
                 .catch(err => console.error(err));
 
-                return message.channel.send(`The mod lgos channel has been set to ${channel}`);
+                return message.channel.send(`The mod logs channel has been set to ${channel}`);
             };
         });
     }
