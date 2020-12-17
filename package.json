@@ -6,17 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
   "license": "ISC",
- 
-  
   "dependencies": {
     "ascii-table": "0.0.9",
     "common-tags": "^1.8.0",
+    "discord": "^0.8.2",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "fs": "0.0.1-security",
     "mongoose": "^5.9.11",
+    "node-superfetch": "^0.1.10",
     "nodemon": "^2.0.4"
   }
 }

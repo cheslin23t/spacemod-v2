@@ -3,10 +3,17 @@ const { config } = require('dotenv');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const client = new Client();
-
+const express = require('express')
+const app = express()
 client.commands = new Collection();
 client.aliases = new Collection();
 client.mongoose = require('./utils/mongoose');
+
+app.get("/", (req, res) => {
+  res.send("Bot is online!")
+})
+
+app.listen(1234)
 
 client.categories = fs.readdirSync('./commands/');
 
