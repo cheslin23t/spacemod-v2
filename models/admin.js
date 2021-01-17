@@ -7,4 +7,4 @@ const userSchema = mongoose.Schema({
     level: String
 });
 
-module.exports = mongoose.model('Admin', userSchema, 'admins');
+module.exports = mongoose.model('Admin', userSchema, 'admins')

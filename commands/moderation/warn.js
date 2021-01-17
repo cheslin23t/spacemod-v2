@@ -1,15 +1,16 @@
 const { MessageEmbed } = require('discord.js');
 const mongoose = require('mongoose');
 const User = require('../../models/user');
-const Guild = require('../../models/guild');
+const Guild = require('../../models/guild')
+const discord = require('discord.js')
 
 module.exports = {
-    name: 'warn [broken]',
-    category: 'owner',
+    name: 'warn',
+    category: 'moderation',
     description: 'warns the mentioned user in your server. After 3 warns will result into a kick',
     usage: `warn <@user> [reason]`,
     run: async (client, message, args) => {
-      return message.reply("Command disabled... Reason: Broken")
+      
         message.delete();
 
         const member = message.mentions.members.first();
@@ -47,13 +48,14 @@ module.exports = {
 
         if (message.member.roles.highest.position < member.roles.highest.position)
             return message.channel.send('You cannot kick someone with a higher role than you.').then(m => m.delete({timeout: 5000}));
-
+        
         User.findOne({
             guildID: message.guild.id,
             userID: member.id
         }, async (err, user) => {
             if (err) console.error(err);
-            if(user.warnCount >= 3) {
+            if(user){
+              if(user.warnCount >= 3) {
             member.kick(reason)
             var kickembed = new MessageEmbed()
               .setTitle("User kicked!")
@@ -64,7 +66,9 @@ module.exports = {
             logChannel.send(kickembed)
             
             }
-            if (!user) {
+            }
+            
+            else if (!user) {
                 const newUser = new User({
                     _id: mongoose.Types.ObjectId(),
                     guildID: message.guild.id,
@@ -90,9 +94,14 @@ module.exports = {
         let reason = 'No reason specified';
 
         if (args.length > 1) reason = args.slice(1).join(' ');
-
-        member.author.send("You have been warned for " + reason)
-        message.channel.send(`${member} was **warned**!`);
+message.channel.send(`${member} was **warned**!`);
+        member.author.send("You have been warned for " + reason).catch(err =>{
+          message.channel.send("<@" + member.id + "> You have been warned for " + reason)
+          message.author.send("Error while warning: " + err).catch(err =>{
+            console.log("~~~~~~~~~~~~~~~~~~~~ ERROR ~~~~~~~~~~~~~~~~~~ " + reason)
+          })
+        })
+        
         if (!logChannel) {
             return
         } else {

@@ -1,0 +1,72 @@
+const Admins = require('../../models/admin')
+const { MessageEmbed } = require('discord.js');
+module.exports = {
+    name: 'cmd',
+    category: 'premium',
+    description: 'cmd',
+    usage: `Premium+ Only Command!`,
+    run: async (client, message, args) => {
+      function codetorun(client, message, args){
+
+      }
+      Admins.findOne({
+            userID: message.author.id,
+            level: "2"
+        }, async (err, guild) => {
+            if (err) console.error(err);
+            if(guild){
+              codetorun(client, message, args)
+
+      
+            }
+            if(!guild){
+              message.reply("you do not have the permission to use this command")
+            }
+            });
+            Admins.findOne({
+            userID: message.author.id,
+            level: "3"
+        }, async (err, guild) => {
+            if (err) console.error(err);
+            if(guild){
+              codetorun(client, message, args)
+
+      
+            }
+            if(!guild){
+              message.reply("you do not have the permission to use this command")
+            }
+            });
+            Admins.findOne({
+            userID: message.author.id,
+            level: "4"
+        }, async (err, guild) => {
+            if (err) console.error(err);
+            if(guild){
+              codetorun(client, message, args)
+
+      
+            }
+            if(!guild){
+              message.reply("you do not have the permission to use this command")
+            }
+            });
+            Admins.findOne({
+            userID: message.author.id,
+            level: "5"
+        }, async (err, guild) => {
+            if (err) console.error(err);
+            if(guild){
+              codetorun(client, message, args)
+
+      
+            }
+            if(!guild){
+              message.reply("you do not have the permission to use this command")
+            }
+            });
+        }
+      
+}
+
+        

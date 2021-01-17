@@ -22,7 +22,6 @@ module.exports = (client) => {
                     return client.aliases.set(alias, pull.name);
                 });
         }
-
-        console.log(table.toString());
+        
     })
 }

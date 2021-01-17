@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Guild = require('../models/guild');
-
+const discord = require("discord.js")
+const bot = new discord.Client()
 module.exports = async (client, message) => {
     if (message.author.bot) return;
-
+    
     const settings = await Guild.findOne({
         guildID: message.guild.id
     }, (err, guild) => {
@@ -31,7 +32,6 @@ module.exports = async (client, message) => {
     if (!message.content.startsWith(prefix)) return;
     
     if (!message.member) message.member = await message.guild.fetchMember (message);
-
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     

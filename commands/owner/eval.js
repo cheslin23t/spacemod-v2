@@ -1,6 +1,8 @@
 const { MessageEmbed } = require('discord.js');
 const Discord = require('discord.js')
-const embed = new Discord.MessageEmbed()
+const cli = new Discord.Client()
+const Client = cli
+
 function clean(string) {
             if (typeof text === "string") {
                 return string.replace(/`/g, "`" + String.fromCharCode(8203))
@@ -19,8 +21,9 @@ module.exports = {
     name: 'eval',
     category: 'owner',
     description: 'Runs javascript (owner only)',
-    usage: `.eval <code>`,
+    usage: `eval <true/false> <code>`,
     run: async (client, message, args) => {
+        const embed = new Discord.MessageEmbed()
         Admins.findOne({
             userID: message.author.id,
             level: "5"
@@ -28,8 +31,9 @@ module.exports = {
             if (err) console.error(err);
             if(guild){
               try {
-    const code = args.join(" ");
-    if (!code) return message.channel.send("Please include the code.");
+
+    const code = args.join(" ").replace(args[0], "")
+    if (!code) return message.channel.send("Please include the code. Usage: eval <true/false> <code>");
     let evaled;
     var dmuser = false
     
@@ -51,12 +55,20 @@ module.exports = {
       embed.addField("Output :outbox_tray:", "```" + output + "```").setColor(0x7289DA)
     }
     if(dmuser = true){
-      message.author.send(embed)
-      message.channel.send("Sent you dm as eval may contain private info")
+      if(args[0] == 'true'){
+          message.channel.send(embed)
+      }
+      else{
+        message.author.send(embed)
+        message.channel.send("Sent you a dm as eval may contain private info")
+        
+      }
+      
+      
     }
     else{
 
-    message.channel.send(embed);
+    message.channel.send("Plz enable yer dms.");
     }
     
   } catch (error) {
@@ -69,12 +81,15 @@ module.exports = {
       embed.addField("Output :outbox_tray:", "```bat" + err + "```").setColor("RED");
     }
     if(dmuser = true){
-      message.author.send(embed)
-      message.channel.send("Sent you dm as eval may contain private info")
-    }
-    else{
-
-    message.channel.send(embed);
+     if(args[0] == 'true'){
+          message.channel.send(embed)
+      }
+      else{
+        message.author.send(embed)
+        message.channel.send("Sent you a dm as eval may contain private info")
+      }
+      
+      
     }
 }
 
