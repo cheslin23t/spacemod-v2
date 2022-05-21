@@ -21,7 +21,7 @@ const adminDB = await Admins.findOne({
             if (err) console.error(err);
             
             if(!guild){
-              message.reply("you do not have the permission to use this command")
+              message.lineReply("you do not have the permission to use this command")
             } else{
 
               var member = message.mentions.members.first();

@@ -26,7 +26,7 @@ module.exports = {
       }, 3000);
             }
             if(!guild){
-              message.reply("you do not have the permission to use this command")
+              message.lineReply("you do not have the permission to use this command")
             }
             });
         }

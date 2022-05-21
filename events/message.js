@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Guild = require('../models/guild');
 const discord = require("discord.js")
-const bot = new discord.Client()
 module.exports = async (client, message) => {
     if (message.author.bot) return;
     
@@ -22,7 +21,7 @@ module.exports = async (client, message) => {
             .then(result => console.log(result))
             .catch(err => console.error(err));
 
-            return message.channel.send('We have added your server to our database! Please try the command `' + message.content + "` again :)").then(m => m.delete({timeout: 10000}));
+            return message.channel.send('We have added your server to our database! Please try the command `' + message.content + "` again :)").then(m => m.delete({timeout: 3000}));
         }
     });
 

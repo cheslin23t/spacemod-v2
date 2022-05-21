@@ -8,4 +8,11 @@ module.exports = async (client, guild) => {
         if(err) console.error(err)
         console.log('I have been removed from a server!');
     });
+  client.user.setPresence({
+        status: 'online',
+        activity: {
+            name: 'Serving ' + client.guilds.cache.size + " guilds.",
+            type: "PLAYING"
+        }
+    });
 };

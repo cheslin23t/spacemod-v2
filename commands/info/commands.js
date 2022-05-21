@@ -56,8 +56,7 @@ module.exports = {
           .setTitle('Commands found')
           .setThumbnail(client.user.avatarURL())
           .setFooter('Created by spacehold')
-          .addField("Spacehold's Server", "[Invite](https://discord.gg/2psC9ph)")
-          .addField("Spacemod Support Server", "[Invite](https://discord.gg/2KswAhHB)")
+          .addField("Spacechat Bot Support Server", "[Invite](https://discord.gg/PHTe7g8V)")
 
         message.channel.send(cateembed.setDescription('Use `' + `${guildDB.prefix}help <commandName>\` without the \`<>\` to see more information about a specific command.\n\n **Commands found for this category:**\n\n` + commands(args[0]))
         )
@@ -70,8 +69,7 @@ module.exports = {
           .setTitle('Command List')
           .setThumbnail(client.user.avatarURL())
           .setFooter('Created by spacehold')
-          .addField("Spacehold's Server", "[Invite](https://discord.gg/2psC9ph)")
-          .addField("Spacemod Support Server", "[Invite](https://discord.gg/2KswAhHB)")
+          .addField("Spacechat Bot Support Server", "[Invite](https://discord.gg/PHTe7g8V)")
 
 
 

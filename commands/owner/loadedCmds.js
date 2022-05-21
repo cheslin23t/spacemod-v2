@@ -1,10 +1,11 @@
 const Admins = require('../../models/admin')
 const { MessageEmbed } = require('discord.js');
 module.exports = {
-    name: 'cmd',
+    name: 'loadedCommands',
     category: 'owner',
-    description: 'cmd',
+    description: 'Shows Loaded Commands!',
     usage: `Owner Only Command!`,
+  aliases: ['loaded', 'loadedcmds'],
     run: async (client, message, args) => {
       Admins.findOne({
           userID: message.author.id,
@@ -12,8 +13,7 @@ module.exports = {
         }, async (err, guild) => {
             if (err) console.error(err);
             if(guild){
-      //code
-
+      message.lineReply(client.loadedCommands.toString())
       
             }
             if(!guild){

@@ -1,13 +1,21 @@
-const { Client, Collection } = require('discord.js');
+require('discord-reply'); //⚠️ IMPORTANT: put this before your discord.Client()
+var discord = require('discord.js')
+var Collection = discord.Collection
+const express = require("express")
+const app = express()
+
+app.use(express.json());
+app.use(express.urlencoded());
+// Optional events
+
+const client = new discord.Client({ intents: [discord.Intents.FLAGS.GUILDS, discord.Intents.FLAGS.GUILD_MESSAGES] });
 const { config } = require('dotenv');
 const fs = require('fs');
 const ascii = require('ascii-table');
 const { readdirSync } = require('fs');
 const mongoose = require('mongoose');
 const admins = require('./models/admin')
-const client = new Client();
-const express = require('express')
-const app = express()
+
 var adminlist
 var usrnames = []
 async function getAdmins() {
@@ -15,7 +23,8 @@ var store = require("./models/admin.js")
   var docs = await store.find({ });
   var usrnames = []
   
-  
+  app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
   
   for (let index = 0; index < docs.length; index++) {
     var usrelement = docs[index].name;
@@ -26,7 +35,7 @@ var store = require("./models/admin.js")
     
   }
   var returnlist = await usrnames
-  adminlist = returnlist.join("</center> <br> ")
+  adminlist = returnlist.join("</center>  ")
   
   
 }
@@ -37,7 +46,9 @@ getAdmins()
   
 client.commands = new Collection();
 client.aliases = new Collection();
+client.queue = new Map();
 const table = new ascii().setHeading('Command', 'Status');
+client.loadedCommands = table
 client.mongoose = require('./utils/mongoose');
 readdirSync('./commands/').forEach(async dir => {
         const commands = readdirSync(`./commands/${dir}/`).filter(f => f.endsWith('.js'));
@@ -47,9 +58,9 @@ readdirSync('./commands/').forEach(async dir => {
 
             if (pull.name) {
                 client.commands.set(pull.name, pull);
-                table.addRow('<br>' + file, '✅ Loaded! <br>');
+                table.addRow('' + file, '✅ Loaded! ');
             } else {
-                table.addRow('<br>' + file, '❌ -> Command failed to load, please check your work again! <br>');
+                table.addRow('' + file, '❌ -> Command failed to load, please check your work again! ');
                 continue;
             }
 
@@ -58,19 +69,15 @@ readdirSync('./commands/').forEach(async dir => {
                     return client.aliases.set(alias, pull.name);
                 });
         }
-        
-
-app.get("/", (req, res) => {
-
-  var loads
-
-res.send(table.toString())
-
     })
-})
+var rp = require("request-promise-core");
+var bodyParser= require("body-parser");
 
 
-app.listen(1234)
+
+
+
+
 
 client.categories = fs.readdirSync('./commands/');
 
@@ -92,8 +99,16 @@ fs.readdir('./events/', (err, files) => {
         client.on(evtName, evt.bind(null, client));
     })
 });
+client.on('rateLimit', console.log)
+app.get("/", (req, res)=>{
+  
+  
+  res.send(table.toString())
+})
+app.post("/upvote", (req, res) => {
+  console.dir(req.body)
+})
 
-
-
-client.mongoose.init();
 client.login(process.env.TOKEN)
+client.mongoose.init();
+app.listen(1234)

@@ -1,24 +1,18 @@
 const Guild = require('../models/guild')
-
+const colors = require('colors')
+console.log('test')
 module.exports = async client => {
-    console.log('Let\'s get this bread!');
-    
+    console.log('Running on '.brightCyan + client.user.tag.brightYellow + ' app!'.brightCyan);
+    console.log('------------------------------------------------'.brightRed)
     
     client.user.setPresence({
         status: 'online',
         activity: {
-            name: 'By Spacehold',
+            name: 'Serving ' + client.guilds.cache.size + " guilds.",
             type: "PLAYING"
         }
     });
-    client.api.applications(client.user.id).guilds('748534353214177321').commands.post({
-        data: {
-            name: "help",
-            description: "Help command!"
-
-            
-        }
-    });
+    
     client.ws.on('INTERACTION_CREATE', async interaction => {
         const command = interaction.data.name.toLowerCase();
         const args = interaction.data.options;

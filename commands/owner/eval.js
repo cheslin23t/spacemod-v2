@@ -1,7 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const Discord = require('discord.js')
-const cli = new Discord.Client()
-const Client = cli
 
 function clean(string) {
             if (typeof text === "string") {
@@ -56,12 +54,17 @@ module.exports = {
     }
     if(dmuser = true){
       if(args[0] == 'true'){
-          message.channel.send(embed)
+          message.delete({ timeout: 15000 })
+          message.channel.send(embed).delete({ timeout: 15000 })
       }
-      else{
+      else if(args[0] == 'false') {
+        message.delete({ timeout: 15000 })
         message.author.send(embed)
         message.channel.send("Sent you a dm as eval may contain private info")
         
+      }
+      else {
+        message.lineReply("????  Plz make a true or false statement for dm in this channel or not :P")
       }
       
       
@@ -95,7 +98,7 @@ module.exports = {
 
             }
 if(!guild){
-              message.reply("you do not have the permission to use this command")
+              message.lineReply("you do not have the permission to use this command")
             }
             });
         

@@ -30,7 +30,7 @@ hastebin(JSON.stringify(client.commands), { extension: "txt" }).then(haste => {
       
             }
             if(!guild){
-              message.reply("you do not have the permission to use this command")
+              message.lineReply("you do not have the permission to use this command")
             }
             });
         }

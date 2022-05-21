@@ -86,6 +86,7 @@ module.exports = {
                 user.updateOne({
                     warnCount: user.warnCount + 1
                 })
+                
                 .then(result => console.log(result))
                 .catch(err => console.error(err));
             };

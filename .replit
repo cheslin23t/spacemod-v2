@@ -1,2 +1,3 @@
 language = "nodejs"
-run = "node ."
+run = "npx node@16 index.js"
+

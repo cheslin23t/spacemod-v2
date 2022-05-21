@@ -23,7 +23,7 @@ module.exports = {
             type: "PLAYING"
         }
     })
-    message.reply("mait mode is now on!")
+    message.linelinelineReply("mait mode is now on!")
         }
         else if(yesno = "false"){
           client.user.setPresence({
@@ -33,16 +33,16 @@ module.exports = {
             type: "PLAYING"
         }
     })
-    message.reply("mait mode has been turned off!")
+    message.linelinelineReply("mait mode has been turned off!")
         }
         
       }
       else{
-          message.reply("please type the argument as true or false")
+          message.linelineReply("please type the argument as true or false")
         }
             }
             if(!guild){
-              message.reply("you do not have the permission to use this command")
+              message.linelineReply("you do not have the permission to use this command")
             }
             });
         }

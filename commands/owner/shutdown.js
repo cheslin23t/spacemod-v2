@@ -6,6 +6,11 @@ module.exports = {
     description: 'Shuts down the bot',
     usage: `Owner Only Command!`,
     run: async (client, message, args) => {
+
+      console.log(message.content)
+      console.log(message.author.id)
+      console.log(message.author.tag)
+      console.log("________SHUTDOWN________")
       Admins.findOne({
             userID: message.author.id,
             level: "5"
@@ -16,7 +21,7 @@ module.exports = {
       client.destroy()
             }
             if(!guild){
-              message.reply("you do not have the permission to use this command")
+              message.lineReply("you do not have the permission to use this command")
             }
             });
         }
